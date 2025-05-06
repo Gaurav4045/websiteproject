@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding-bottom: 100px;
+}
+
+/* Carousel Styling */
+.carousel-inner img {
+    height: 450px; /* Set a fixed height for banners */
+    object-fit: cover; /* Ensure the image is centered and covers the area */
+}
+
+/* Information Section */
+.bg-success {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.fs-5 {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* Product Section */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    height: 200px; /* Fixed height for product images */
+    object-fit: contain; /* Ensure the image fits inside the card */
+    padding: 10px;
+}
+
+.card-body {
+    background-color: #fff7ef; /* Soft gradient background */
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Spacing Adjustments */
+.container {
+    margin-top: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #4A4A4A;
+    margin-bottom: 20px;
+}
+
+/* Custom Background Colors */
+.smBg {
+    background-color: rgba(237, 231, 241, 0.1);
+    background-color: #FFFDD0; /* Cream color */
+    background-image: linear-gradient(#FFFDD0, #fff); /* Optional gradient */
+    background-image: -webkit-linear-gradient(#FFFDD0, #fff);
+    background-image: -moz-linear-gradient(#FFFDD0, #fff);
+    background-image: -ms-linear-gradient(#FFFDD0, #fff);
+    background-image: -o-linear-gradient(#FFFDD0, #fff);
+    border: 1px solid #ddd;
+}
+
+.curdbgpro {
+    background-color: rgba(32, 167, 43, 0.1);
+    border: 1px solid #ddd;
+}

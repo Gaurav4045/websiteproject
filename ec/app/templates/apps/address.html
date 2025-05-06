@@ -1,0 +1,40 @@
+{% extends "apps/base.html" %}
+{% load static %}
+{% block title %}Addresses{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <h3>Welcome <span class="text-capitalize">{{ request.user }}</span></h3>
+    
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid"><a href="{% url 'profile' %}" class="btn ">Profile</a></li>
+                <li class="d-grid"><a href="{% url 'adress' %}" class="btn btn-primary">Address</a></li>
+            </ul>
+        </div>
+
+        <div class="col-sm-8 offset-sm-1">
+            <!-- Flex container for horizontal layout -->
+            <div class="d-flex flex-wrap gap-3">
+                {% for ad in add %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Address {{ forloop.counter }}</h5>
+                        <p class="card-text">Name: {{ ad.name }}</p>
+                        <p class="card-text">Locality: {{ ad.locality }}</p>
+                        <p class="card-text">Mobile: {{ ad.mobile }}</p>
+                        <p class="card-text">City: {{ ad.city }}</p>
+                        <p class="card-text">State: {{ ad.state }}</p>
+                        <p class="card-text">Pincode: {{ ad.zipcode }}</p>
+                        <!-- Update Address Button -->
+                        <a href="{% url 'adressupdate' ad.id %}" class="btn btn-primary btn-sm mt-3 w-100">Update</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock main-content %}

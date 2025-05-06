@@ -1,0 +1,100 @@
+{% extends 'apps/base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock title %}
+{% block main-content %}
+<div class="container">
+    {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            {% for msg in messages %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="row mt-5">
+        <div class="col-sm-6">
+            <h4>Order Summary</h4>
+            <hr>
+            {% for item in cart_items %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5>Product: {{ item.product.title }}</h5>
+                        <p>Quantity: {{ item.quantity }}</p>
+                        <p class="fw-bold">Price: {{ item.product.discounted_price }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <p class="fw-bold">Total Cost + Rs. 40 = {{ totalamount }}</p>
+            <small>
+                Terms and Conditions: By placing an order on this website, you agree that all orders are subject to availability and confirmation of the order price. Shipping and delivery timelines are estimates and may vary based on location and unforeseen circumstances. Products once purchased can only be returned or exchanged as per our return policy. The company reserves the right to cancel or modify orders if fraudulent activity is suspected. Prices are inclusive of applicable taxes unless otherwise stated. By proceeding with the checkout, you agree to our privacy policy and terms of service. For any questions, please contact our customer support team.
+            </small>
+        </div>
+        <div class="col-sm-4 offset-sm-1">
+            <h4>Select Shipping Address</h4>
+            <hr>
+            <form method="post" id="myform">
+                {% csrf_token %}
+                {% for ad in add %}
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="fw-bold">{{ ad.name }}</h5>
+                            <p>Mobile: {{ ad.mobile }}</p>
+                            <p>{{ ad.locality }}, {{ ad.city }}, {{ ad.state }} - {{ ad.zipcode }}</p>
+                        </div>
+                        <div class="form-check mt-2 mb-3">
+                            <input class="form-check-input" type="radio" name="custid" id="custadd{{ forloop.counter }}" value="{{ ad.id }}">
+                            <label class="form-check-label fw-bold" for="custadd{{ forloop.counter }}">
+                                Address: {{ forloop.counter }}
+                            </label>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="form-check mb-3">
+                    <label for="totalamount" class="form-label fw-bold">Total Amount</label>
+                    <input type="number" class="form-control" name="totalamount" value="{{ totalamount }}" readonly>
+                </div>
+                <div class="text-end">
+                    <button id="rzp-button1" type="submit" class="btn btn-warning mt-3 px-5 fw-bold">payments</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
+{% block Payment-gateway %}
+
+<script>
+    var options = {
+        // Configuration options for Razorpay payment gateway
+        "key": "{{ RAZOR_KEY_ID }}", // Razorpay API key from Django settings
+        "amount": "{{ razoramount }}", // Amount in paise (1 INR = 100 paise)
+        "currency": "INR", // Transaction currency
+        "name": "neelproduct", // Merchant name
+        "description": "Purchase Product", // Description of the transaction
+        "order_id": "{{ order_id }}", // Unique order ID obtained from the server
+        "handler": function (response) { // Function to handle the response
+            console.log("success"); // Log payment success to the console
+            var form = document.getElementById("myform"); // Reference to the form element
+            // Redirect to payment success URL with necessary details
+            window.location.href = `http://localhost:8000/paymentdone?order_id=${response.razorpay_order_id}&payment_id=${response.razorpay_payment_id}&cust_id=${form.elements["custid"].value}`;
+        },
+        "theme": {
+            "color": "#3399cc" // Custom color for Razorpay payment form
+        }
+    };
+
+    // Initialize Razorpay with the specified options
+    var rzp1 = new Razorpay(options);
+
+    // Define the event listener for payment failure
+    rzp1.on('payment.failed', function (response) {
+        alert(response.error.description); // Display error description in an alert
+    });
+
+    // Add click event listener to the Razorpay button
+    document.getElementById('rzp-button1').onclick = function (e) {
+        console.log("button click"); // Log button click
+        rzp1.open(); // Open Razorpay payment form
+        e.preventDefault(); // Prevent default form submission behavior
+    };
+</script>
+{% endblock Payment-gateway %}
