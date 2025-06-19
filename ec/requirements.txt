@@ -23,6 +23,10 @@ h11==0.14.0
 idna==3.10
 ipykernel==6.29.5
 ipython==8.29.0
+Django>=4.2,<5.0
+gunicorn
+whitenoise
+
 itsdangerous==2.2.0
 jedi==0.19.1
 Jinja2==3.1.6
