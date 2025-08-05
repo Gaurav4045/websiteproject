@@ -2,11 +2,14 @@ asgiref==3.8.1
 certifi==2025.4.26
 charset-normalizer==3.4.2
 Django==5.1.4
-gunicorn
-whitenoise
 idna==3.10
+<<<<<<< HEAD
 ipykernel==6.29.5
 ipython==8.29.0
+Django>=4.2,<5.0
+gunicorn
+whitenoise
+
 itsdangerous==2.2.0
 jedi==0.19.1
 Jinja2==3.1.6
@@ -36,6 +39,9 @@ python-dateutil==2.9.0.post0
 pytz==2025.2
 pywin32==308
 pyzmq==26.2.0
+=======
+pillow==11.0.0
+>>>>>>> 2970cbd (Add requirements.txt for deployment)
 razorpay==1.4.2
 requests==2.32.3
 setuptools==80.3.1
