@@ -2,7 +2,9 @@ asgiref==3.8.1
 certifi==2025.4.26
 charset-normalizer==3.4.2
 Django==5.1.4
+gunicorn==23.0.0
 idna==3.10
+packaging==25.0
 pillow==11.0.0
 razorpay==1.4.2
 requests==2.32.3
