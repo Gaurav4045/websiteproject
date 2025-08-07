@@ -1,2 +1,2 @@
-web: gunicorn ec.ec.wsgi
+web: gunicorn ec.wsgi
 
